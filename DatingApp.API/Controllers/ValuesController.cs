@@ -9,12 +9,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.API.Controllers
 {
-    [Authorize]
+    // [Authorize]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
         private readonly DataContext _context;
-        public ValuesController(DataContext context){_context = context;}
+        public ValuesController(DataContext context) { _context = context; }
         // GET api/values
         [HttpGet]
         public async Task<IActionResult> GetValues()
@@ -28,20 +29,20 @@ namespace DatingApp.API.Controllers
         public async Task<IActionResult> GetValue(int id)
         {
             var value = await _context.Values.FirstOrDefaultAsync(x => x.Id == id);
-            if (value == null) {return Ok("No results");}
+            if (value == null) { return Ok("Not found!"); }
             return Ok(value);
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value) {}
+        public void Post([FromBody]string value) { }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value){}
+        public void Put(int id, [FromBody]string value) { }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id){}
+        public void Delete(int id) { }
     }
 }
