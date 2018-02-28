@@ -9,9 +9,12 @@ import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 
+import { Ng2IziToastModule } from 'ng2-izitoast';
+import { BsDropdownModule } from 'ngx-bootstrap';
+
 @NgModule({
   declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent],
-  imports: [BrowserModule, HttpModule, FormsModule],
+  imports: [BrowserModule, HttpModule, FormsModule, Ng2IziToastModule, BsDropdownModule.forRoot() ],
   providers: [AuthService],
   bootstrap: [AppComponent]
 })

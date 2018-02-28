@@ -22,7 +22,7 @@ namespace DatingApp.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody]UserForRegisterDto userForRegisterDto)
         {
-            userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
+            if(!string.IsNullOrEmpty(userForRegisterDto.Username))  userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
             if (await _repo.UserExists(userForRegisterDto.Username)) ModelState.AddModelError("Username", "El usuario ya existe");
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var userToCreate = new User { Username = userForRegisterDto.Username };
@@ -33,6 +33,7 @@ namespace DatingApp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]UserForLoginDto userForLoginDto)
         {
+        // throw new Exception ("Computer says NO!");
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
             if (userFromRepo == null) return Unauthorized();
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -50,10 +51,6 @@ namespace DatingApp.API.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
             return Ok(new{tokenString});
-
         }
-
-
     }
-
 }
