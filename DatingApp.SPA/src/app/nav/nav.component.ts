@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { Ng2IzitoastService } from 'ng2-izitoast';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -9,19 +10,19 @@ import { Ng2IzitoastService } from 'ng2-izitoast';
 })
 export class NavComponent implements OnInit {
   model: any = {};
-  constructor(private authService: AuthService, public iziToast: Ng2IzitoastService) {}
+  constructor(private authService: AuthService, public iziToast: Ng2IzitoastService, private router: Router) {}
   ngOnInit() {}
   login() {
     this.authService.login(this.model).subscribe(
       data => {this.iziToast.success({position: 'topRight', title: 'OK', message: 'Bienvenido... '}); },
-      error => {this.iziToast.error({position: 'topRight', title: 'Error', message: 'Credenciales inválidas', transitionIn: 'fadeInLeft', transitionOut: 'fadeOut', animateInside: false}, ); }
-    );
+      error => {this.iziToast.error({position: 'topRight', title: 'Error', message: 'Credenciales inválidas', transitionIn: 'fadeInLeft', transitionOut: 'fadeOut', animateInside: false}, ); },
+      () => {this.router.navigate(['/members']); });
   }
   logout() {
     this.authService.userToken = null;
     localStorage.removeItem('token');
     this.iziToast.info({position: 'topRight', title: 'OK', message: 'Gracias por tu visita... '});
-    console.log('Logged out!');
+    this.router.navigate(['/home']);
   }
   loggedIn() {return this.authService.loggedIn(); }
 }
