@@ -7,7 +7,6 @@ import { Ng2IzitoastService } from 'ng2-izitoast';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
-// import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class MemberListResolver implements Resolve<User[]> {
