@@ -1,0 +1,12 @@
+<div class="card border-0 p-2">
+  <img class="card-img" src="{{user.photoUrl}}" alt="{{user.knownAs}}">
+  <div class="btn-group justify-content-center">
+      <button type="button" class="btn btn-xs btn-primary m-1" [routerLink]="['/members/', user.id]" routerLinkActive="router-link-active" ><i class="fa fa-user"></i></button>
+      <button type="button" class="btn btn-xs btn-primary p-1 m-1"><i class="fa fa-heart"></i></button>
+      <button type="button" class="btn btn-xs btn-primary p-2 m-1"><i class="fa fa-envelope"></i></button>
+  </div>
+  <div class="card-body">
+    <h6 class="text-small text-center"><i class="fa fa-user pr-1"></i>{{user.knownAs}}</h6>
+    <p class="card-text text-center">{{user.city}}</p>
+  </div>
+</div>

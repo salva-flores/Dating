@@ -1,6 +1,8 @@
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 import { Observable } from 'rxjs/Observable';
 
@@ -25,7 +27,10 @@ export class AuthService {
   }
   private handleError(error: any) {
     const applicationError = error.headers.get('Application-Error');
-    if (applicationError) {return Observable.throw (applicationError);
-    }
+    if (applicationError) {return Observable.throw (applicationError); }
+    const serverError = error.json();
+    let modelStateErrors = '';
+    if (serverError) {for (const key in serverError) {if (serverError[key]) {modelStateErrors += serverError[key] + '\n'; }}}
+    return Observable.throw(modelStateErrors || 'Server error');
    }
 }
