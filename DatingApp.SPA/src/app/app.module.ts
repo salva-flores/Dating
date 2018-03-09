@@ -16,6 +16,7 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthService } from './_services/auth.service';
@@ -28,10 +29,11 @@ import { Ng2IziToastModule } from 'ng2-izitoast';
 import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent, MemberListComponent, ListsComponent, MessagesComponent, MemberCardComponent, MemberDetailComponent, MemberEditComponent],
-  imports: [BrowserModule, HttpModule, FormsModule, Ng2IziToastModule, BsDropdownModule.forRoot(), RouterModule.forRoot(appRoutes), AuthModule, TabsModule.forRoot(), NgxGalleryModule],
+  declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent, MemberListComponent, ListsComponent, MessagesComponent, MemberCardComponent, MemberDetailComponent, MemberEditComponent, PhotoEditorComponent],
+  imports: [BrowserModule, HttpModule, FormsModule, Ng2IziToastModule, BsDropdownModule.forRoot(), RouterModule.forRoot(appRoutes), AuthModule, TabsModule.forRoot(), NgxGalleryModule, FileUploadModule],
   providers: [AuthService, AuthGuard, UserService, MemberDetailResolver, MemberListResolver, MemberEditResolver, PreventUnsavedChanges],
   bootstrap: [AppComponent]
 })

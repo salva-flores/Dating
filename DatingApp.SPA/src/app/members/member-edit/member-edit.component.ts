@@ -14,10 +14,12 @@ import { NgForm } from '@angular/forms';
 export class MemberEditComponent implements OnInit {
   user: User;
   @ViewChild('editForm') editForm: NgForm;
+  photoUrl: string;
   constructor(private route: ActivatedRoute, private izi: Ng2IzitoastService, private authService: AuthService, private userService: UserService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {this.user = data['user']; });
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
   updateUser() {
     this.userService.updateUser(this.authService.decodedToken.nameid, this.user).subscribe(next => {
@@ -26,4 +28,5 @@ export class MemberEditComponent implements OnInit {
     }, error => {this.izi.error({position: 'topRight', title: 'Error!', message: 'No pudo actualizar el perfil!.'}); });
     // console.log(this.user);
  }
+ updateMainPhoto(photoUrl) { this.user.photoUrl = photoUrl; }
 }
