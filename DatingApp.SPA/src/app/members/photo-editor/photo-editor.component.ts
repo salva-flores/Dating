@@ -3,7 +3,7 @@ import { Photo } from '../../_models/Photo';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../_services/auth.service';
-import { UserService } from '../../_services/User.service';
+import { UserService } from '../../_services/user.service';
 import { Ng2IzitoastService } from 'ng2-izitoast';
 import * as _ from 'underscore';
 
@@ -54,7 +54,7 @@ export class PhotoEditorComponent implements OnInit {
         localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
         console.log('foto establecida satisfactoriamente!');
       },
-      error => {this.izi.error({position: 'topRight', title: 'ERROR!', message: 'No se pudo establecer... '});}
+      error => {this.izi.error({position: 'topRight', title: 'ERROR!', message: 'No se pudo establecer... '}); }
     );
   }
   deletePhoto(id: number) {
