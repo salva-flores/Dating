@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../_services/User.service';
+import { UserService } from '../../_services/user.service';
 import { Ng2IzitoastService } from 'ng2-izitoast';
 import { User } from '../../_models/User';
 import { ActivatedRoute } from '@angular/router';

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from '../../_models/User';
 import { Ng2IzitoastService } from 'ng2-izitoast';
 import { AuthService } from '../../_services/auth.service';
-import { UserService } from '../../_services/User.service';
+import { UserService } from '../../_services/user.service';
 import { NgForm } from '@angular/forms';
 
 @Component({

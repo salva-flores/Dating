@@ -1,5 +1,5 @@
 <div class="card border-0 p-2">
-  <img class="card-img" src="{{user.photoUrl}}" alt="{{user.knownAs}}">
+  <img class="card-img" src="{{user.photoUrl ? user.photoUrl : '../../../assets/user.png'}}" alt="{{user.knownAs}}">
   <div class="btn-group justify-content-center">
       <button type="button" class="btn btn-xs btn-primary m-1" [routerLink]="['/members/', user.id]" routerLinkActive="router-link-active" ><i class="fa fa-user"></i></button>
       <button type="button" class="btn btn-xs btn-primary p-1 m-1"><i class="fa fa-heart"></i></button>

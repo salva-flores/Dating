@@ -1,10 +1,10 @@
   <div *ngIf="!registerMode" class="d-flex flex-row justify-content-center">
-    <div class="card border-0">
-      <div class="card-body">
+    <div class="card border-0 pt-3">
+      <div class="card-body p-0">
         <h4 class="card-title">Encuentra tu pareja!</h4>
         <h6 class="card-subtitle text-muted">Solo necesitas registrarte!</h6>
     </div>
-    <div class="card-body">
+    <div class="card-body p-0 pt-2">
       <p class="card-text">Text</p>
       <button type="button" class="btn btn-primary btn-sm" (click)="registerToggle()">Registrarse</button>
       <button type="button" class="btn btn-secondary btn-sm">Más información</button>
@@ -12,9 +12,9 @@
   </div>
 </div>
   <div *ngIf="registerMode" class="d-flex flex-row  justify-content-center">
-    <div class="card border-0">
-      <div class="card-body">
-        <h4 class="card-title">Crea tu cuenta</h4>
+    <div class="card border-0 pt-3">
+      <div class="card-body p-0">
+        <h4 class="card-title">Crea tu cuenta</h4><hr>
         <app-register (cancelRegister)="resetRegisterMode($event)"></app-register>
       </div>
     </div>

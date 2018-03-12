@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../_models/User';
-import { UserService } from '../../_services/User.service';
+import { UserService } from '../../_services/user.service';
 import { Ng2IzitoastService } from 'ng2-izitoast';
 import { ActivatedRoute } from '@angular/router';
 

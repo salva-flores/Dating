@@ -16,7 +16,7 @@
           <button class="btn btn-dark btn-sm" type="submit" [disabled]="!loginForm.valid">Entrar</button>
         </form>
       <ul class="navbar-nav right" *ngIf="loggedIn()">
-        <li><img src="{{photoUrl}}"></li>
+        <li><img src="{{photoUrl}}" class="img-circle"></li>
         <li class="nav-item dropdown" dropdown>
           <a class="nav-link dropdown-toggle" id="navbarDropdown" href="javascript:" dropdownToggle>{{ authService.decodedToken?.unique_name | titlecase}}</a>
           <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>

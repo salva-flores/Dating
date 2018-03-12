@@ -16,6 +16,9 @@ export class AppComponent implements OnInit {
     const token = localStorage.getItem('token');
     const user: User = JSON.parse(localStorage.getItem('user'));
     if (token) {this.authService.decodedToken = this.jwtHelper.decodeToken(token); }
-    if (user) {this.authService.currentUser = user; this.authService.changeMemberPhoto(user.photoUrl); }
+    if (user) {
+      this.authService.currentUser = user;
+      if (this.authService.currentUser.photoUrl == null) {this.authService.changeMemberPhoto('../assets/user.png'); } else {this.authService.changeMemberPhoto(user.photoUrl); }
+    }
   }
 }

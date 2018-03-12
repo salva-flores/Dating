@@ -25,6 +25,7 @@ export class PhotoEditorComponent implements OnInit {
   ngOnInit() {this.initializaUploader(); }
 
   public fileOverBase(e: any): void {this.hasBaseDropZoneOver = e; }
+
   initializaUploader() {
     this.uploader = new FileUploader({
       url: this.baseUrl + 'users/' + this.authService.decodedToken.nameid + '/photos',
@@ -40,6 +41,11 @@ export class PhotoEditorComponent implements OnInit {
         const res: Photo = JSON.parse(response);
         const photo = {id: res.id, url: res.url, dateAdded: res.dateAdded, description: res.description, isMain: res.isMain};
         this.photos.push(photo);
+        if (photo.isMain) {
+          this.authService.changeMemberPhoto(photo.url);
+          this.authService.currentUser.photoUrl = photo.url;
+          localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
+        }
       }
     };
   }

@@ -27,11 +27,12 @@ currentPhotoUrl = this.photoUrl.asObservable();
         this.decodedToken = this.jwtHelper.decodeToken(user.tokenString);
         this.currentUser = user.user;
         this.userToken = user.tokenString;
-        this.changeMemberPhoto(this.currentUser.photoUrl); }
+        if (this.currentUser.photoUrl == null) {this.changeMemberPhoto('../../assets/user.png'); } else {this.changeMemberPhoto(this.currentUser.photoUrl); }
+         }
       console.log(this.decodedToken);
     });
   }
-  register(model: any) {return this.http.post(this.baseUrl + 'register', model, this.requestOptions()); }
+  register(user: User) {return this.http.post(this.baseUrl + 'register', user, this.requestOptions()); }
   loggedIn() {return tokenNotExpired('token'); }
   private requestOptions() {
     const headers = new Headers({ 'Content-Type': 'application/json' });

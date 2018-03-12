@@ -19,7 +19,7 @@ namespace DatingApp.API.Controllers
         public UsersController(iDatingRepository repo, IMapper mapper) { _repo = repo; _mapper = mapper; }
         [HttpGet]
         public async Task<IActionResult> GetUsers() { var users = await _repo.GetUsers(); var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users); return Ok(usersToReturn); }
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id) { var user = await _repo.GetUser(id); var userToReturn = _mapper.Map<UserForDetailDto>(user); return Ok(userToReturn); }
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UserForUpdateDto userForUpdateDto)
