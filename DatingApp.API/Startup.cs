@@ -44,6 +44,8 @@ namespace DatingApp.API
             services.AddAutoMapper();
             services.AddScoped<IAuthRepository,AuthRepository>();
             services.AddScoped<iDatingRepository,DatingRepository>();
+            services.AddScoped<UserLog>();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters{
                     ValidateIssuerSigningKey = true, 

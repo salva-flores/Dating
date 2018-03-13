@@ -10,11 +10,13 @@ import 'rxjs/add/observable/of';
 
 @Injectable()
 export class MemberListResolver implements Resolve<User[]> {
+    pageSize = 5;
+    pageNumber = 1;
     constructor(private userService: UserService, private router: Router, private izi: Ng2IzitoastService) {}
     resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
-        return this.userService.getUsers().catch(error => {
+        return this.userService.getUsers(this.pageNumber, this.pageSize).catch(error => {
             this.izi.error({position: 'topRight', title: 'Error!', message: 'Hubo un problema al recuperar los datos...'});
-            this.router.navigate(['/members']);
+            this.router.navigate(['/home']);
             return Observable.of(null);
         });
     }

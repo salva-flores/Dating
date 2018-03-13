@@ -32,8 +32,8 @@
   </div>
 
   <div class="form-group">
-    <!-- <input type="password" class="form-control form-control-sm" formControlName="password" placeholder="Contraseña" [ngClass]="{'is-invalid': registerForm.get('password').errors && registerForm.get('password').touched}"> -->
-    <input type="password" class="form-control form-control-sm" formControlName="password" placeholder="Contraseña" >
+    <input type="password" class="form-control form-control-sm" formControlName="password" placeholder="Contraseña" [ngClass]="{'is-invalid': registerForm.get('password').errors && registerForm.get('password').touched}">
+    <!-- <input type="password" class="form-control form-control-sm" formControlName="password" placeholder="Contraseña" > -->
     <span class="invalid-feedback" *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched">Campo requerido!</span>
     <span class="invalid-feedback" *ngIf="registerForm.get('password').hasError('minlength') && registerForm.get('password').touched">Tiene que tener al menos 4 caracteres.</span>
     <span class="invalid-feedback" *ngIf="registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched">No puede exceder de 8 caracteres.</span>
@@ -50,5 +50,3 @@
     <button type="submit" class="btn btn-default btn-sm" (click)="cancel()">Cancelar</button>
   </div>
 </form>
-
-<p>{{registerForm.status | json}}</p>
