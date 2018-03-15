@@ -17,15 +17,13 @@
       </div>
       <div class="card-footer right border-0 bg-light p-1">
         <!-- <div class="btn-group justify-content-center"> -->
-        <button type="button" class="btn btn-xs btn-primary m-1">
-          <i class="fa fa-thumb-up"></i>Like</button>
-        <button type="button" class="btn btn-xs btn-success p-1 m-1">
-          <i class="fa fa-mail"></i>Message</button>
+        <button type="button" class="btn btn-sm btn-primary m-1"><i class="fa fa-thumb-up"></i>Like</button>
+        <button type="button" class="btn btn-sm btn-success m-1" (click)="selectTab(3)"><i class="fa fa-mail"></i>Message</button>
         <!-- </div> -->
       </div>
     </div>
     <div class="col-sm-8">
-      <tabset>
+      <tabset #memberTabs>
         <tab heading="About {{user.knownAs}}">
           <h4>Description: </h4>
           <p>{{user.introduction}}</p>
@@ -40,7 +38,7 @@
           <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
         </tab>
         <tab heading="Messages">
-          <p>Messages will go here</p>
+          <app-member-messages [userId]="user.id"></app-member-messages>
         </tab>
       </tabset>
     </div>

@@ -18,9 +18,9 @@ namespace DatingApp.API.Controllers
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
-        private readonly iDatingRepository _repo;
+        private readonly IDatingRepository _repo;
         private readonly IMapper _mapper;
-        public UsersController(iDatingRepository repo, IMapper mapper) { _repo = repo; _mapper = mapper; }
+        public UsersController(IDatingRepository repo, IMapper mapper) { _repo = repo; _mapper = mapper; }
         [HttpGet]
         public async Task<IActionResult> GetUsers(UserParams userParams)
         { 

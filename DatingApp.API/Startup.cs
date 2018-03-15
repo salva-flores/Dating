@@ -43,7 +43,7 @@ namespace DatingApp.API
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
             services.AddScoped<IAuthRepository,AuthRepository>();
-            services.AddScoped<iDatingRepository,DatingRepository>();
+            services.AddScoped<IDatingRepository,DatingRepository>();
             services.AddScoped<UserLog>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
