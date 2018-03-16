@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './_services/auth.service';
-import { JwtHelper } from 'angular2-jwt';
 import { User } from './_models/User';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +9,13 @@ import { User } from './_models/User';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app';
-  jwtHelper: JwtHelper = new JwtHelper();
-  constructor(private authService: AuthService) {}
+  // title = 'app';
+  // jwtHelper: JwtHelper = new JwtHelper(); these two lines removed to user new jwt helper service below whrn decoding the token
+  constructor(private authService: AuthService, private jwtHelperService: JwtHelperService) {}
   ngOnInit() {
     const token = localStorage.getItem('token');
     const user: User = JSON.parse(localStorage.getItem('user'));
-    if (token) {this.authService.decodedToken = this.jwtHelper.decodeToken(token); }
+    if (token) {this.authService.decodedToken = this.jwtHelperService.decodeToken(token); }
     if (user) {
       this.authService.currentUser = user;
       if (this.authService.currentUser.photoUrl == null) {this.authService.changeMemberPhoto('../assets/user.png'); } else {this.authService.changeMemberPhoto(user.photoUrl); }

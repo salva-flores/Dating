@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { JwtModule } from '@auth0/angular-jwt';
 import { Ng2IziToastModule } from 'ng2-izitoast';
 import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule } from 'ngx-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 
-import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { AuthService } from './_services/auth.service';
@@ -33,7 +34,10 @@ import { TimeAgoPipe } from 'time-ago-pipe';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessageResolver } from './_resolvers/message.resolver';
 import { MemberMessagesComponent } from './messages/member-messages/member-messages.component';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
 
+export function getAccessToken(): string {return localStorage.getItem('token'); }
+export const jwtConfig = {tokenGetter: getAccessToken, whitelistedDomains: ['localhost:59211'] };
 
 @NgModule({
   declarations: [
@@ -59,12 +63,14 @@ import { MemberMessagesComponent } from './messages/member-messages/member-messa
     Ng2IziToastModule,
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    AuthModule, TabsModule.forRoot(),
+    TabsModule.forRoot(),
     NgxGalleryModule,
     FileUploadModule,
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    HttpClientModule,
+    JwtModule.forRoot({config: jwtConfig})
   ],
   providers: [
     AuthService,
@@ -75,7 +81,8 @@ import { MemberMessagesComponent } from './messages/member-messages/member-messa
     MemberEditResolver,
     PreventUnsavedChanges,
     ListsResolver,
-    MessageResolver
+    MessageResolver,
+    ErrorInterceptorProvider
   ],
   bootstrap: [AppComponent]
 })

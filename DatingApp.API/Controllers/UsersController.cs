@@ -63,7 +63,7 @@ namespace DatingApp.API.Controllers
                 LikeeId = recipientId
             } ;
             _repo.Add<Like>(like);
-            if (await _repo.SaveAll()) return Ok();
+            if (await _repo.SaveAll()) return Ok(new {});
             return BadRequest("No se pudo agregar");
         }
     }
