@@ -18,7 +18,8 @@ export class MessageResolver implements Resolve<Message[]> {
     constructor(private userService: UserService, private router: Router, private izi: Ng2IzitoastService, private authService: AuthService ) {}
     resolve(route: ActivatedRouteSnapshot): Observable<Message[]> {
         return this.userService.getMessages(this.authService.decodedToken.nameid, this.pageNumber, this.pageSize, this.messageContainer).catch(error => {
-            this.izi.error({position: 'topRight', title: 'Error!', message: 'Hubo un problema al recuperar los datos...'});
+            // this.izi.error({position: 'topRight', title: 'Error!', message: 'Hubo un problema al recuperar los datos...'});
+            this.izi.error({position: 'topRight', title: 'Error!', message: error});
             this.router.navigate(['/members']);
             return Observable.of(null);
         });

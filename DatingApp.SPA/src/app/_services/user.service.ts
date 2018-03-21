@@ -16,20 +16,6 @@ export class UserService {
 
   constructor(private authHttp: HttpClient) {}
 
-  // private handleError(error: any) {
-  //   if (error.status === 400) {return Observable.throw(error._body); }
-  //   const applicationError = error.headers.get('Application-Error');
-  //   if (applicationError) {return Observable.throw(applicationError); }
-  //   const serverError = error.json();
-  //   let modelStateErrors = '';
-  //   if (serverError) {
-  //     for (const key in serverError) {
-  //       if (serverError[key]) {modelStateErrors += serverError[key] + '\n'; }
-  //     }
-  //   }
-  //   return Observable.throw(modelStateErrors || 'Server error');
-  // }
-
   getUsers(page?, itemsPerPage?, userParams?: any, likesParam?: string) {
     const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
     let params = new HttpParams() ;

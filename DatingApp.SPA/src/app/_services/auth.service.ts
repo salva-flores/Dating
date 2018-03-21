@@ -31,7 +31,7 @@ export class AuthService {
         this.currentUser = user.user;
         this.userToken = user.tokenString;
         if (this.currentUser.photoUrl == null) {this.changeMemberPhoto('../../assets/user.png'); } else {this.changeMemberPhoto(this.currentUser.photoUrl); }
-      }      // console.log(this.decodedToken);
+      }      console.log(this.decodedToken);
     });
   }
 
@@ -43,14 +43,4 @@ export class AuthService {
     if (!token) {return false; }
     return !this.jwtHelperService.isTokenExpired(token);
   }
-
-  // private handleError(error: any) {
-  //   const applicationError = error.headers.get('Application-Error');
-  //   if (applicationError) {return Observable.throw (applicationError); }
-  //   const serverError = error.json();
-  //   let modelStateErrors = '';
-  //   if (serverError) {for (const key in serverError) {if (serverError[key]) {modelStateErrors += serverError[key] + '\n'; }}}
-  //   return Observable.throw(modelStateErrors || 'Server error');
-  //  }
-
 }

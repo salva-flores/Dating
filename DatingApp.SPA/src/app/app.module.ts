@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,7 +17,6 @@ import { UserService } from './_services/user.service';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
-
 import { appRoutes } from './routes';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -30,14 +29,16 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
+import { MemberMessagesComponent } from './messages/member-messages/member-messages.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessageResolver } from './_resolvers/message.resolver';
-import { MemberMessagesComponent } from './messages/member-messages/member-messages.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 
 export function getAccessToken(): string {return localStorage.getItem('token'); }
+// export const jwtConfig = {tokenGetter: getAccessToken, whitelistedDomains: ['localhost:59211'], blacklistedRoutes: ['localhost:59211/auth/'], whiteListedDomains: ['localhost:59211'] };
 export const jwtConfig = {tokenGetter: getAccessToken, whitelistedDomains: ['localhost:59211'] };
+// export const jwtConfig = {tokenGetter: getAccessToken, whitelistedDomains: [] };
 
 @NgModule({
   declarations: [

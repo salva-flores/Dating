@@ -25,10 +25,7 @@ namespace DatingApp.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public Startup(IConfiguration configuration){Configuration = configuration; }
 
         public IConfiguration Configuration { get; }
 
@@ -38,16 +35,15 @@ namespace DatingApp.API
             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value);
             services.AddDbContext<DataContext>(x => x
             .UseMySql(Configuration.GetConnectionString("DefaultConnection"))
-            .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.IncludeIgnoredWarning))); // this line to remove warnings in the terminal
-            services.AddTransient<Seed>();
-            services.AddMvc();
+            .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.IncludeIgnoredWarning))); 
+            // this line to remove warnings in the terminal
             services.AddMvc().AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddTransient<Seed>();
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
             services.AddScoped<IAuthRepository,AuthRepository>();
             services.AddScoped<IDatingRepository,DatingRepository>();
-            services.AddScoped<UserLog>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters{
                     ValidateIssuerSigningKey = true, 
@@ -56,23 +52,24 @@ namespace DatingApp.API
                     ValidateAudience = false
                     };
             });
+            services.AddScoped<UserLog>();
         }
 
 public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value);
             services.AddDbContext<DataContext>(x => x
+            // .UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
             .UseMySql(Configuration.GetConnectionString("DefaultConnection"))
-            .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.IncludeIgnoredWarning))); // this line to remove warnings in the terminal
-            services.AddTransient<Seed>();
-            services.AddMvc();
+            .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.IncludeIgnoredWarning))); 
+            // this line to remove warnings in the terminal
             services.AddMvc().AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddTransient<Seed>();
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
             services.AddScoped<IAuthRepository,AuthRepository>();
             services.AddScoped<IDatingRepository,DatingRepository>();
-            services.AddScoped<UserLog>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters{
                     ValidateIssuerSigningKey = true, 
@@ -81,6 +78,7 @@ public void ConfigureDevelopmentServices(IServiceCollection services)
                     ValidateAudience = false
                     };
             });
+            services.AddScoped<UserLog>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

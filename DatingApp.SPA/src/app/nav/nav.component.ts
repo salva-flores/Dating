@@ -13,13 +13,15 @@ export class NavComponent implements OnInit {
   model: any = {};
   constructor(public authService: AuthService, public iziToast: Ng2IzitoastService, private router: Router) {}
   ngOnInit() {this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl); }
+
   login() {
     this.authService.login(this.model).subscribe(
       data => {this.iziToast.success({position: 'topRight', title: 'OK', message: 'Bienvenido... '}); },
       error => {this.iziToast.error({position: 'topRight', title: 'Error', message: 'Credenciales inválidas', transitionIn: 'fadeInLeft', transitionOut: 'fadeOut', animateInside: false}); },
       () => {this.router.navigate(['/members']); });
     }
-  logout() {
+
+    logout() {
     this.authService.userToken = null;
     this.authService.currentUser = null;
     localStorage.removeItem('token');
