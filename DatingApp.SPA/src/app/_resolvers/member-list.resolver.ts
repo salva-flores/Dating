@@ -16,7 +16,7 @@ export class MemberListResolver implements Resolve<User[]> {
     resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
         return this.userService.getUsers(this.pageNumber, this.pageSize).catch(error => {
             console.log(error);
-            this.izi.error({position: 'topRight', title: 'Error!', message: 'Hubo un problema al recuperar los datos...'});
+            this.izi.error({position: 'topRight', title: 'member-list.resolver', message: error});
             this.router.navigate(['/home']);
             return Observable.of(null);
         });

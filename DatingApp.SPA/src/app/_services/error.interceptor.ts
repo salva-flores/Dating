@@ -7,7 +7,11 @@ import { Observable } from 'rxjs/Observable';
 
 export class ErrorInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(req).catch(error => {
+        const token = localStorage.getItem('token');
+        let clone: HttpRequest<any>;
+        // tslint:disable-next-line:max-line-length
+        if (token) {clone = req.clone({setHeaders: {Accept: `application/json`, 'Content-Type': `application/json`, Authorization: `Bearer ${token}`}}); } else {clone = req.clone({setHeaders: {Accept: `application/json`, 'Content-Type': `application/json` } }); }
+        return next.handle(clone).catch(error => {
             if (error instanceof HttpErrorResponse) {
                 // if (error.status === 400) {return Observable.throw(error._body); }
                 const applicationError = error.headers.get('Application-Error');

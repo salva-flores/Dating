@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { PaginatedResult } from '../_models/pagination';
 import { Message } from '../_models/message';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpInterceptor } from '@angular/common/http';
 
 @Injectable()
 
@@ -51,6 +51,7 @@ export class UserService {
     params = params.append('MessageContainer', messageContainer);
     if (page != null && itemsPerPage != null) { params = params.append( 'pageNumber', page); params = params.append('pageSize', itemsPerPage); }
     return this.authHttp.get<Message[]>(this.baseUrl + 'users/' + id + '/messages' , {observe: 'response', params})
+    // .subscribe(data => console.log(data), err => console.log(err));
     .map(response => {
       paginatedResult.result = response.body;
       if (response.headers.get('Pagination') != null) {paginatedResult.pagination = JSON.parse(response.headers.get('Pagination')); }
