@@ -94,7 +94,7 @@ public void ConfigureDevelopmentServices(IServiceCollection services)
                     });
                 });
              }
-            //seeder.SeedUsers();
+            seeder.SeedUsers();
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
             app.UseDefaultFiles(); // to run the files in wwwroot after the ng build

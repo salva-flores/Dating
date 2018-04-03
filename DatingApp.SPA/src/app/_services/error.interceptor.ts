@@ -9,7 +9,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const token = localStorage.getItem('token');
         let clone: HttpRequest<any>;
-        // tslint:disable-next-line:max-line-length
+        // tslint:disable-next-line:max-line-length -- added tofix bug in prod mode to append auth header in request
         if (token) {clone = req.clone({setHeaders: {Accept: `application/json`, 'Content-Type': `application/json`, Authorization: `Bearer ${token}`}}); } else {clone = req.clone({setHeaders: {Accept: `application/json`, 'Content-Type': `application/json` } }); }
         return next.handle(clone).catch(error => {
             if (error instanceof HttpErrorResponse) {
